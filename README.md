@@ -37,7 +37,7 @@ I suggest only choosing a single compressed version based on your requirements a
 
 ## Examples
 
-This show generating only json, json + gz, json + br, and json + gz + br in order.
+This show generating only json, json + gz, json + br, and json + gz + br in order. These examples are only using the first 2048 hashes, and therefore need to pass `--strict false` to prevent exiting due to unexpected input size.
 
 ```console
 chip@cancer hibp-json % rm -rf dist && /usr/bin/time ./target/release/hibp-json --strict false --brotli false --gzip false
