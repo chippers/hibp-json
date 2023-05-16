@@ -35,11 +35,11 @@ Thus, if you decide to **only** serve compressed assets, then you don't need the
 | Original | ~`33 GiB` | n/a |
 | JSON | ~`50 GiB` | `3m` |
 | Gzip | ~`17.3 GiB` | `5m` |
-| Brotli | ~`16 GiB` | `90m` |
+| Brotli | ~`15.3 GiB` | `90m` |
 
 <sup>note: timings taken on my Macbook Pro m2 Pro</sup>
 
-I suggest only choosing a single compressed version based on your requirements and excluding generating raw JSON files. Brotli has slightly lower global support (but still extremely high) and takes consideribly longer to generate but generates 10% smaller files.
+I suggest only choosing a single compressed version based on your requirements and excluding generating raw JSON files. Brotli has slightly lower global support (but still extremely high) and takes consideribly longer to generate but is `69.39%` smaller compared to gzip at `65.52%`.
 
 ## Examples
 
