@@ -1,4 +1,4 @@
-/target
-/hashes
-/dist
-/benchdata
+target/
+hashes/
+dist/
+benchdata/
