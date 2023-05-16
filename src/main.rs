@@ -211,17 +211,6 @@ fn main() -> Result<()> {
                 total_json.fetch_add(content.len() as u64, Ordering::SeqCst);
             }
 
-            /*if zopfli {
-                let file = File::create(dist.join(format!("{prefix}.json.gz"))).unwrap();
-                let mut buf: BufWriter<File> = BufWriter::new(file);
-                zopfli::compress(
-                    &Default::default(),
-                    &zopfli::Format::Gzip,
-                    serialized.as_slice(),
-                    &mut buf,
-                )
-                .unwrap();
-            }*/
             if gzip {
                 let file = File::create(dist.join(format!("{prefix}.json.gz"))).unwrap();
                 let mut buf: BufWriter<File> = BufWriter::new(file);
