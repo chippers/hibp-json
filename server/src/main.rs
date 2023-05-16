@@ -134,6 +134,19 @@ async fn main() -> anyhow::Result<()> {
     let port: u16 = var_or_else("PORT", "8080").parse()?;
     let address = SocketAddr::new(host, port);
 
+    println!(
+        "brotli: {} | gzip: {} | json: {}",
+        state.brotli, state.gzip, state.json
+    );
+
+    if state.root.as_os_str().is_empty() {
+        println!("using current working directory as root")
+    } else {
+        println!("root: {}", state.root.display());
+    }
+
+    println!("starting server at http://{address}/");
+
     let app = Router::new()
         .route("/", get(index))
         .route("/:hash5", get(hash5))
