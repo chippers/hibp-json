@@ -78,3 +78,20 @@ Finished generating files in 10817ms (12580ms total)
 Bytes: json 105166422 | br 32191367 | gz 36263187
        12.59 real       114.42 user         3.05 sys
 ```
+
+## Server
+
+There is a server located in [`server/`](server). It is currently someone rudimentary. Run it inside the `dist/` directory, or set the location with the `ROOT` env var. Then check the server index for instructions for how to use the API. (default http://127.0.0.1:8080/)
+
+It currently supports:
+* `ROOT` env var to set the path to the `dist/` directory created from the tool (defaults to current working directory)
+* `HOST` to set the host to something other than `127.0.0.1`
+* `PORT` to set the port to something other than `8080`
+* Checks compression (and raw json) support by just reading the `$ROOT/0/0/0/0/0.json` file (and `.br`, `.gz`)
+* Simple parser for `Accept-Encoding` that completely ignores weight
+
+TODO:
+* Comprehensive validation of the `ROOT` directory, including compression support
+* Decompression on-the-fly if wanted if `.json` files don't exist (compile-time feature?)
+* Improve error messages
+* Cleanup code a bit
