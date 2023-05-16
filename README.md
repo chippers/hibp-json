@@ -1,26 +1,32 @@
 # hibp-json
 
-Turns HaveIBeenPwned (HIBP) passsword hash files into JSON format, along with compressing them (optionally) into `.gz` and/or `.br` files for quick static serving.
+Turns [HaveIBeenPwned] (HIBP) passsword hash files into JSON format, along with compressing them (optionally) into `.gz` and/or `.br` files for quick static serving.
+
+The purpose of this is to easily turn the password hash lookup service into a self-hosted instance that simply serves static files.
+
+[HaveIBeenPwned]: https://haveibeenpwned.com/
 
 ## Prerequisites
 
-You must have aquired all of the HIBP hash files through the [PwnedPasswordsDownloader](https://github.com/HaveIBeenPwned/PwnedPasswordsDownloader) using the individual hash files option. This is their example of how to use their downloader that downloads into individual hash files (`-s false`) with 64 threads (`-p 64`). This step will take a while, and you should take care not to delete the created directory otherwise you will have to re-download everything.
+You must have aquired all of the HIBP hash files through the [PwnedPasswordsDownloader] using the individual hash files option. This is their example of how to use their downloader that downloads into individual hash files (`-s false`) with 64 threads (`-p 64`). This step will take a while, and you should take care not to delete the created directory otherwise you will have to re-download everything.
 
 ```
 haveibeenpwned-downloader.exe hashes -s false -p 64
 ```
 
+[PwnedPasswordsDownloader]: https://github.com/HaveIBeenPwned/PwnedPasswordsDownloader
+
 ## Running
 
 By default `hibp-json` expects the hashes to be in `hashes/` and the output to be created in `dist/`. This is configurable, see `hibp-json --help`.
 
-By default, `.json` files, `.json.gz` files, and `.json.br` files will be created. Each of these can be turned off, see `hibp-json --help`.
+`.json` files, `.json.gz` files, and `.json.br` files will be created. Each of these can be turned off, see `hibp-json --help`.
 
 ## Size
 
 Here are the size of the raw files. Notably, the original format is about as efficient as possible (the first 5 chars of the hash being excluded because its in the filename) and each line is just `{hash}:{count}`. Because of this, the JSON size is somewhat larger because the full hash is included to prevent needing to remember to concat the hashes on the frontend alongside each item becoming a JSON object with `hash` and `count` fields.
 
-This is not a huge deal, because the compression algorithms are able to cut down on the repetitive structure of the JSON, bringing the compressed versions to the size of the original version when compressed. e.g. `000D0.txt` is `35,905` bytes raw and `17,190` bytes compressed with brotli while `000D0.json` is `57,045` bytes raw and `17,405` bytes compressed.
+This is not a huge deal, because the compression algorithms are able to cut down on the repetitive structure of the JSON, bringing the compressed versions to the size of the original version when compressed. e.g. `000D0.txt` is `35,905` bytes raw and `17,190` bytes (brotli) compressed while `000D0.json` is `57,045` bytes raw and `17,405` bytes (brotli) compressed.
 
 Thus, if you decide to **only** serve compressed assets, then you don't need the raw JSON files and can exclude them from generation by adding `--json false`. This allows you to only serve gzip or brotli compressed files, and possibly optionally decompressing on-the-fly when requested for a non-compressed file. Virtually every browser and most tools support gzip compressed content, and a [very large amount (96.6%) of browsers support brotli](https://caniuse.com/brotli).
 
