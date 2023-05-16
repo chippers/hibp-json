@@ -1,0 +1,24 @@
+[package]
+name = "hibp-json"
+version = "0.1.0"
+license = "MIT or Apache-2.0"
+edition = "2021"
+
+[profile.release]
+codegen-units = 1
+incremental = false
+lto = true
+
+[dependencies]
+anyhow = "1"
+brotli = "3"
+clap = { version = "4", features = ["derive"] }
+console = "0.15"
+flate2 = { version = "1.0.26", default-features = false, features = ["zlib-ng"] }
+indicatif = { version = "0.17", features = ["rayon"] }
+mimalloc = "0.1"
+rayon = "1"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+walkdir = "2"
+zopfli = "0.7"
