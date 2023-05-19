@@ -9,7 +9,7 @@ anyhow = "1"
 brotli = "3"
 clap = { version = "4", features = ["derive"] }
 console = "0.15"
-flate2 = { version = "1.0", default-features = false, features = ["zlib-ng"] }
+flate2 = { version = "1", default-features = false, features = ["zlib-ng"] }
 indicatif = { version = "0.17", features = ["rayon"] }
 mimalloc = "0.1"
 rayon = "1"
