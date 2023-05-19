@@ -140,7 +140,7 @@ async fn main() -> anyhow::Result<()> {
     );
 
     if state.root.as_os_str().is_empty() {
-        println!("using current working directory as root")
+        println!("using current working directory as root");
     } else {
         println!("root: {}", state.root.display());
     }
